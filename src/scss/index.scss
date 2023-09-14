@@ -1,5 +1,27 @@
-$red: black;
+@import url('https://fonts.cdnfonts.com/css/roboto');
+@import '~normalize.css';
+
+@import 'pages/excel/header';
+@import 'pages/excel/toolbar';
+@import 'pages/excel/formula';
+@import 'pages/excel/table';
+@import 'pages/dashboard/index';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-  background: $red;
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+}
+
+.excel {
+  position: relative;
+  color: #888;
+  height: 100%;
+  width: 100%;
+  font-size: 0.8rem;
 }
