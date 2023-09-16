@@ -98,7 +98,7 @@
     border-left: none;
     color: #111;
 
-    & .selected {
+    &.selected {
       border: none;
       outline: 2px solid $blue-color;
       z-index: 2;
