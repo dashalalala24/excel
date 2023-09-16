@@ -3,22 +3,27 @@ const CODES = {
   Z: 90,
 };
 
-function toCell() {
-  return `
-    <div contenteditable class="cell"></div>`;
+function toCell(_, columnIndex) {
+  return `<div contenteditable class="cell" data-row="${''}" data-column="${columnIndex + 1}"></div>`;
 }
 
-function toColumn(content) {
+function toColumn(content, index) {
   return `
-    <div class="column">
+    <div class="column" data-type="resizable" data-column="${index + 1}">
       ${content}
+      <div class="column-resize" data-resize="column"></div>
     </div>`;
 }
 
 function createRow(rowIndex, content) {
+  const resizer = rowIndex ? '<div class="row-resize" data-resize="row"></div>' : '';
+
   return `
-    <div class='row'>
-      <div class="row-info">${rowIndex}</div>
+    <div class='row' data-type="resizable">
+      <div class="row-info">
+        ${rowIndex ? rowIndex : ''}
+        ${resizer}
+      </div>
       <div class="row-data">${content}</div>
     </div>`;
 }
@@ -30,48 +35,14 @@ export function createTable(rowsCount = 15) {
   const columns = new Array(columnsCount).fill('').map(toChar).map(toColumn).join('');
 
   const rows = [];
-  rows.push(createRow('', columns));
-
-  // const cellsRow = [];
-
-  // for (let i = 0; i < columnsCount; i++) {
-  //   // console.log(cellsRow);
-  //   cellsRow.push(toCell());
-  // }
+  rows.push(createRow(null, columns));
 
   for (let i = 0; i < rowsCount; i++) {
     const rowIndex = i + 1;
+    const columnIndex = toChar('', rowIndex);
     const cells = new Array(columnsCount).fill('').map(toCell).join('');
     rows.push(createRow(rowIndex, cells));
   }
 
-  // console.log(cellsRow.join(''));
   return rows.join('');
-
-  // <div class="row">
-  //   <div class="row-info"></div>
-  //   <div class="row-data">
-  //     <div class="column">A</div>
-  //     <div class="column">B</div>
-  //     <div class="column">C</div>
-  //   </div>
-  // </div>
-  // <div class="row">
-  //   <div class="row-info">1</div>
-  //   <div contenteditable class="cell">1</div>
-  //   <div contenteditable class="cell">2</div>
-  //   <div contenteditable class="cell">3</div>
-  // </div>
-  // <div class="row">
-  //   <div class="row-info">1</div>
-  //   <div contenteditable class="cell">1</div>
-  //   <div contenteditable class="cell">2</div>
-  //   <div contenteditable class="cell">3</div>
-  // </div>
-  // <div class="row">
-  //   <div class="row-info">1</div>
-  //   <div contenteditable class="cell">1</div>
-  //   <div contenteditable class="cell">2</div>
-  //   <div contenteditable class="cell">3</div>
-  // </div>`;
 }
