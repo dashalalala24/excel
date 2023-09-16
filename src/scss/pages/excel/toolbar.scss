@@ -10,6 +10,7 @@
   border-bottom: 1px solid $border-color;
   padding: 7px 10px;
   display: flex;
+  background-color: #fff;
 
   .button {
     @include button(green);
