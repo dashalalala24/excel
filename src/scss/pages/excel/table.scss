@@ -10,6 +10,8 @@
   overflow-y: scroll;
   padding-bottom: 2px;
   z-index: -1;
+  // display: flex;
+  // flex-direction: column;
 
   & .row {
     display: flex;
@@ -26,6 +28,11 @@
     border: 1px solid $border-color;
     border-top: none;
     background-color: #f8f9fa;
+    position: relative;
+
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
   }
 
   & .row-data {
@@ -42,6 +49,43 @@
     border: 1px solid $border-color;
     border-top: none;
     border-left: none;
+    position: relative;
+
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+  }
+
+  & .column-resize,
+  .row-resize {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: $blue-color;
+    opacity: 0;
+    z-index: 1000;
+
+    &:hover {
+      opacity: 1 !important;
+    }
+  }
+
+  & .column-resize {
+    top: 0;
+    width: 4px;
+
+    &:hover {
+      cursor: col-resize;
+    }
+  }
+
+  & .row-resize {
+    left: 0;
+    height: 4px;
+
+    &:hover {
+      cursor: row-resize;
+    }
   }
 
   & .cell {
@@ -56,7 +100,7 @@
 
     & .selected {
       border: none;
-      outline: 2px solid #3c74ff;
+      outline: 2px solid $blue-color;
       z-index: 2;
     }
   }
